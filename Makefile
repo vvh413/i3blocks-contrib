@@ -1,4 +1,4 @@
-PREFIX = $(HOME)/.local/
+PREFIX = --help
 
 _INSTALLDIR = $(DESTDIR)$(PREFIX)/libexec/i3blocks/
 

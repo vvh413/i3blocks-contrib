@@ -1,0 +1,78 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+# Change $SCRIPT_DIR to the location of your scripts!
+command=$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=30
+markup=none
+
+[mediaplayer]
+interval=1
+# signal=10
+align=left
+
+[dunst]
+interval=once
+format=json
+markup=pango
+#min_width=50
+#align=center
+
+[xkb_layout]
+font=monospace
+font_weight=bold
+interval=persist
+markup=pango
+color=#ffffff
+
+# [iface]
+# color=#55bb55
+# interval=10
+
+[volume]
+interval=once
+signal=10
+label= 
+STEP=2%
+color=#aaaaff
+
+[mic]
+command=volume/volume
+interval=once
+signal=10
+label= 
+STEP=2%
+SCONTROL=Capture
+color=#baaaff
+
+[time]
+command=if [[ $BLOCK_BUTTON -eq "1" ]]; then i3-msg -q exec gsimplecal; fi; date '+%d/%m/%y %T'
+interval=1
+color=#ffaaff
+
+[shutdown_menu]
+full_text=
+color=#990000
