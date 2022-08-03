@@ -137,11 +137,11 @@ sub playerctl {
 
     my $title = qx(playerctl $player_arg metadata title);
     exit(0) if $? || $title eq '(null)';
+    chomp $title;
     push(@metadata, $title) if $title;
 
     my $artist = qx(playerctl $player_arg metadata artist 2>/dev/null);
     chomp $artist;
-    # exit(0) if $? || $artist eq '(null)';
     push(@metadata, $artist) if $artist;
 
     print(icon, " ", join(" - ", @metadata)) if @metadata;
