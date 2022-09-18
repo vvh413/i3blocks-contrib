@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pcount=`pactl list source-outputs short | wc -l`
+
+if [[ $pcount -ne "0" ]]; then
+    echo $pcount
+    if [[ $BLOCK_BUTTON -eq "3" ]]; then
+        pactl -f json list source-outputs | jq '.[].properties."application.process.id" | tonumber' | xargs kill
+    fi
+fi
+

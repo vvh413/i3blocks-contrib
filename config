@@ -52,6 +52,10 @@ color=#ffffff
 # color=#55bb55
 # interval=10
 
+[source_outputs]
+interval=1
+color=#ff0000
+
 [volume]
 interval=once
 signal=10
