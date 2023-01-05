@@ -135,6 +135,10 @@ sub icon {
 sub playerctl {
     buttons('playerctl');
 
+    my $player = qx(playerctl $player_arg -l | head -n 1);
+    chomp $player;
+    $player_arg = "-p $player" if $player;
+
     my $title = qx(playerctl $player_arg metadata title);
     exit(0) if $? || $title eq '(null)';
     chomp $title;
@@ -145,6 +149,17 @@ sub playerctl {
     push(@metadata, $artist) if $artist;
 
     print(icon, " ", join(" - ", @metadata)) if @metadata;
+
+    my $length = qx(playerctl $player_arg metadata mpris:length 2>/dev/null);
+    chomp $length;
+    my $position = qx(playerctl $player_arg position 2>/dev/null);
+    chomp $position;
+    if ($length) {
+        my $progress = $position / $length * 10**8;
+        push(@metadata, $progress);
+        printf(" (%.0f\%)", $progress)
+    }
+
 }
 
 sub rhythmbox {
